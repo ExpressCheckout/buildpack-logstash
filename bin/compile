@@ -10,18 +10,22 @@ ENV_DIR=$3
 
 mkdir -p $CACHE_DIR
 
-LOGSTASH_URL=https://download.elastic.co/logstash/logstash/logstash-2.3.1.tar.gz
+LOGSTASH_TAR=logstash-2.3.1.tar.gz
+LOGSTASH_URL=https://download.elastic.co/logstash/logstash/$LOGSTASH_TAR
 
-if [[ -f "$CACHE_DIR/logstash-2.3.1.tar.gz" ]]; then
+if [[ -f "$CACHE_DIR/$LOGSTASH_TAR" ]]; then
     echo "Logstash package already detected in cache, skipping download."
 else
     echo "Downloading Logstash into $CACHE_DIR ..."
-    curl --silent --location $LOGSTASH_URL -o $CACHE_DIR/logstash-2.3.1.tar.gz
+    curl --silent --location $LOGSTASH_URL -o $CACHE_DIR/$LOGSTASH_TAR
     echo "...done."
 fi
 
 echo "Unpacking Logstash..."
-tar -xzf $CACHE_DIR/logstash-2.3.1.tar.gz -C $BUILD_DIR
+tar -xzf $CACHE_DIR/$LOGSTASH_TAR -C $BUILD_DIR/logstash
+echo "...done."
+
+echo "Installing logstach plugins..."
 echo "...done."
 
 
