@@ -29,7 +29,7 @@ fi
 
 echo "Unpacking Logstash..."
 tar -xzf $CACHE_DIR/$LOGSTASH_TAR -C $BUILD_DIR
-mv $LOGSTASH_VERSION logstash
+mv $BUILD_DIR/$LOGSTASH_VERSION $BUILD_DIR/logstash
 echo "...done."
 
 echo "Installing logstach plugins..."
