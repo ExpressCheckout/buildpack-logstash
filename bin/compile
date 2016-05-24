@@ -15,7 +15,8 @@ ENV_DIR=$3
 
 mkdir -p $CACHE_DIR
 
-LOGSTASH_TAR=logstash-2.3.1.tar.gz
+LOGSTASH_VERSION=logstash-2.3.1
+LOGSTASH_TAR=$LOGSTASH_VERSION.tar.gz
 LOGSTASH_URL=https://download.elastic.co/logstash/logstash/$LOGSTASH_TAR
 
 if [[ -f "$CACHE_DIR/$LOGSTASH_TAR" ]]; then
@@ -27,8 +28,8 @@ else
 fi
 
 echo "Unpacking Logstash..."
-mkdir -p $BUILD_DIR/logstash
-tar -xzf $CACHE_DIR/$LOGSTASH_TAR -C $BUILD_DIR/logstash
+tar -xzf $CACHE_DIR/$LOGSTASH_TAR -C $BUILD_DIR
+mv $LOGSTASH_VERSION logstash
 echo "...done."
 
 echo "Installing logstach plugins..."
