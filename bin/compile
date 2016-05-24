@@ -1,6 +1,11 @@
 #!/bin/bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
+# if any of the commands below fail, exit this whole script
+# also exit if any piped commands fail
+set -e
+set -o pipefail
+
 echo "_Compiling_ Logstash package"
 
 # parse args
@@ -22,6 +27,7 @@ else
 fi
 
 echo "Unpacking Logstash..."
+mkdir -p $BUILD_DIR/logstash
 tar -xzf $CACHE_DIR/$LOGSTASH_TAR -C $BUILD_DIR/logstash
 echo "...done."
 
